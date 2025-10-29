@@ -7,14 +7,17 @@ public class Food {
         this.amount = amount;
     }
 
-    public void consume(int inputAmount) {
+    public synchronized void consume(int inputAmount) {
         if(amount > inputAmount){
             amount -= inputAmount;
             System.out.println(Thread.currentThread().getName() + ": Consumed " + inputAmount + " from " + amount);
+        } else {
+            amount = 0;
+            System.out.println("Consumed " + inputAmount + " from " + amount);
         }
     }
 
-    public int getAmount() {
+    public synchronized int getAmount() {
         return amount;
     }
 }
